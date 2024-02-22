@@ -7,11 +7,16 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { useDispatch, useSelector } from "react-redux";
+import { CompilerSliceStateType, updateCurrentLanguage } from "@/redux/slices/compilerSlice";
+import { RootState } from "@/redux/store";
 
 function EditerHeader() {
+  const dispatch = useDispatch(); // this changes the value in redux store ig
+  const CurrentLanguage = useSelector((state: RootState)=>state.compilerSlice.currentLanguage)
   return (
     <div className=" _EH h-[50px] bg-black text-white p=2 flex items-center justify-between">
-      <div className="_btn_container flex gap-1">
+      <div className="_btn_container flex gap-1 select-none">
         <Button
           className="flex justify-center items-center gap-1"
           variant="success"
@@ -28,7 +33,8 @@ function EditerHeader() {
         </Button>
       </div>
       <div className="_tab_switcher">
-        <Select defaultValue="html">
+        <Select defaultValue={CurrentLanguage}
+        onValueChange={(value) => dispatch(updateCurrentLanguage(value as CompilerSliceStateType["currentLanguage"] ))/**this basically gives the type of currentlang to value ig */}> 
           <SelectTrigger className="w-[180px] bg-gray-800 focus:ring-0">
             <SelectValue />
           </SelectTrigger>

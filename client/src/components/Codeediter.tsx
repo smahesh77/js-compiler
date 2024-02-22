@@ -4,10 +4,13 @@ import { javascript } from "@codemirror/lang-javascript";
 import { tags as t } from '@lezer/highlight';
 import { dracula, draculaInit } from '@uiw/codemirror-theme-dracula';
 import { loadLanguage, langNames, langs } from '@uiw/codemirror-extensions-langs';
+import { RootState } from "@/redux/store";
+import { useSelector } from "react-redux";
 
 
 
 function Codeediter() {
+    const CurrentLanguage = useSelector((state: RootState)=>state.compilerSlice.currentLanguage)
   const [value, setValue] = React.useState("console.log('hello world!');");
   const onChange = React.useCallback((val: any) => {
     console.log("val:", val);
@@ -16,8 +19,9 @@ function Codeediter() {
   return (
     <CodeMirror
       value={value}
+      
       height="100vh"
-      extensions={[loadLanguage('javascript')!]} // give thr lang yo want the codeediter to recognize here
+      extensions={[loadLanguage(CurrentLanguage)!]} // give thr lang yo want the codeediter to recognize here
       onChange={onChange}
       theme={draculaInit({
         settings: {
