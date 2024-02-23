@@ -1,5 +1,6 @@
 import Codeediter from "@/components/Codeediter";
 import EditerHeader from "@/components/EditerHeader";
+import RenderCode from "@/components/RenderCode";
 import {
   ResizablePanelGroup,
   ResizablePanel,
@@ -14,10 +15,8 @@ export default function Compiler() {
         className="h-[calc(100dvh-60px)] min-w-[350px]"
         defaultSize={50}
       >
-        <div className="m-2">
-          <EditerHeader />
-          <Codeediter />
-        </div>
+        <EditerHeader />
+        <Codeediter />
       </ResizablePanel>
       <ResizableHandle />
       <ResizablePanel
@@ -25,7 +24,7 @@ export default function Compiler() {
         defaultSize={50}
         // the default size is how the windows load when opened it could be 10-90, 70-30
       >
-        Right side
+        <RenderCode />
       </ResizablePanel>
     </ResizablePanelGroup>
   );
